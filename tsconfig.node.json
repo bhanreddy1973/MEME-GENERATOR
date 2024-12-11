@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": true, // Enable project references
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "module": "ESNext", // Set module system to ESNext
+    "moduleResolution": "bundler", // Use bundler module resolution strategy
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+    "strict": true, // Enable all strict type-checking options
+    "noEmit": false, // Allow emitting output files (set to false)
+    "jsx": "react-jsx" // Use the new JSX transform for React
+  },
+  "include": ["vite.config.ts"] // Include Vite configuration file for processing
+}

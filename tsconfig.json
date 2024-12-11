@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Set target to ES2020
+    "useDefineForClassFields": true, // Use define for class fields
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Include ES2020 and DOM libraries
+    "module": "ESNext", // Set module system to ESNext
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "moduleResolution": "bundler", // Use bundler module resolution strategy
+    "resolveJsonModule": true, // Allow importing JSON modules
+    "isolatedModules": true, // Ensure each file can be transpiled independently
+    "noEmit": false, // Allow emitting output files
+    "jsx": "react-jsx", // Use the new JSX transform for React
+    "strict": true, // Enable all strict type-checking options
+    "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statements
+    "baseUrl": ".", // Base URL for module resolution
+    "paths": {
+      "@/*": ["./src/*"] // Path alias configuration
+    },
+    "composite": true, // Enable project references if needed
+    "allowSyntheticDefaultImports": true // Allow default imports from modules with no default export
+  },
+  "include": ["src"], // Include all TypeScript files in src directory
+  "references": [{ "path": "./tsconfig.node.json" }] // Reference to node-specific configuration
+}
