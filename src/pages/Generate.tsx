@@ -14,7 +14,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://meme-generator-ecwu.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 interface MemeResult {
   success: boolean;

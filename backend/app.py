@@ -33,15 +33,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Paths - support Render persistent disk or local dev
-BASE_DIR = Path(__file__).parent.parent
-RENDER_DATA_DIR = Path("/app/meme_data")
+# Paths - support Docker/Render or local dev
+MEME_DATA_DIR = Path("/app/meme_data/media")
+LOCAL_DATA_DIR = Path(__file__).parent.parent / "meme_folder" / "media"
 
-# Use Render/Docker path if it exists and has data, otherwise fall back to local
-if RENDER_DATA_DIR.exists() and (RENDER_DATA_DIR / "media").exists():
-    DATASET_DIR = RENDER_DATA_DIR / "media"
+# Use Docker path if it exists, otherwise fall back to local
+if MEME_DATA_DIR.exists():
+    DATASET_DIR = MEME_DATA_DIR
+elif LOCAL_DATA_DIR.exists():
+    DATASET_DIR = LOCAL_DATA_DIR
 else:
-    DATASET_DIR = BASE_DIR / "meme_folder" / "media"
+    # Create the directory so StaticFiles doesn't crash on startup
+    MEME_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    DATASET_DIR = MEME_DATA_DIR
 
 OCR_CACHE_FILE = Path(__file__).parent / "ocr_texts.json"
 TEXT_EMBEDDINGS_FILE = Path(__file__).parent / "text_embeddings.npz"
