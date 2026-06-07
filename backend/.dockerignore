@@ -3,3 +3,6 @@ __pycache__/
 .env
 gan_outputs/
 *.pyc
+text_embeddings.npz
+train_gan.py
+start.sh
