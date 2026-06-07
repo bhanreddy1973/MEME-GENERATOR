@@ -19,6 +19,7 @@ RUN pip install --no-cache-dir sentence-transformers gdown
 COPY app.py .
 COPY precompute_ocr.py .
 COPY ocr_texts.json .
+COPY text_embeddings.npz .
 COPY download_memes.py .
 COPY entrypoint.sh .
 

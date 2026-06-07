@@ -41,4 +41,3 @@ meme_folder/
 
 # Backend generated files
 backend/gan_outputs/
-backend/text_embeddings.npz
