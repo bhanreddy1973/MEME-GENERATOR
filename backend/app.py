@@ -35,10 +35,10 @@ app.add_middleware(
 
 # Paths - support Render persistent disk or local dev
 BASE_DIR = Path(__file__).parent.parent
-RENDER_DATA_DIR = Path(os.environ.get("RENDER_DISK_PATH", "/data/memes"))
+RENDER_DATA_DIR = Path("/app/meme_data")
 
-# Use Render disk if it exists and has data, otherwise fall back to local
-if RENDER_DATA_DIR.exists() and any(RENDER_DATA_DIR.iterdir()):
+# Use Render/Docker path if it exists and has data, otherwise fall back to local
+if RENDER_DATA_DIR.exists() and (RENDER_DATA_DIR / "media").exists():
     DATASET_DIR = RENDER_DATA_DIR / "media"
 else:
     DATASET_DIR = BASE_DIR / "meme_folder" / "media"

@@ -1,7 +1,7 @@
 # Render Blueprint - deploy backend as a Docker web service
 services:
   - type: web
-    name: memegenius-backend
+    name: meme-generator
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
@@ -9,7 +9,3 @@ services:
     envVars:
       - key: PYTHONUNBUFFERED
         value: "1"
-    disk:
-      name: meme-data
-      mountPath: /data/memes
-      sizeGB: 2
