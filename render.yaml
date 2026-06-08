@@ -1,5 +1,6 @@
-# Render Blueprint - deploy backend as a Docker web service
+# Render Blueprint
 services:
+  # Backend API
   - type: web
     name: meme-generator
     runtime: docker
@@ -9,3 +10,18 @@ services:
     envVars:
       - key: PYTHONUNBUFFERED
         value: "1"
+
+  # Frontend (Static Site)
+  - type: web
+    name: memegenius-frontend
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    plan: free
+    envVars:
+      - key: VITE_API_URL
+        value: https://meme-generator-ecwu.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
