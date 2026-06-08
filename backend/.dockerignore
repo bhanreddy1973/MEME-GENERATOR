@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.env
+gan_outputs/
+*.pyc
+train_gan.py
+start.sh

@@ -22,3 +22,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+backend/.env
+.env
+.env.*
+
+# Python
+backend/.venv/
+backend/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+
+# Large assets (stored separately / downloaded at deploy time)
+meme_folder/
+*.zip
+
+# Backend generated files
+backend/gan_outputs/

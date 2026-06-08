@@ -1,0 +1,11 @@
+# Render Blueprint - deploy backend as a Docker web service
+services:
+  - type: web
+    name: meme-generator
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
