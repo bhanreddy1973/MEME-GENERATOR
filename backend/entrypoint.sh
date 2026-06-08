@@ -1,10 +1,9 @@
 #!/bin/bash
-set -e
 
 echo "=== MemeGenius Startup ==="
 
 # Download memes from Google Drive (skips if already present)
-python download_memes.py
+python download_memes.py || echo "[Entrypoint] Download script had issues, continuing anyway..."
 
 # Start the FastAPI server
 echo "=== Starting server ==="

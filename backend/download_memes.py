@@ -1,6 +1,6 @@
 """
 Download meme images from Google Drive on first startup.
-Skips download if images already exist (persistent disk).
+Skips download if images already exist.
 """
 import os
 import subprocess
@@ -22,34 +22,23 @@ def download_memes():
     MEME_DIR.mkdir(parents=True, exist_ok=True)
 
     try:
-        result = subprocess.run(
-            [
-                sys.executable, "-m", "gdown",
-                f"https://drive.google.com/drive/folders/{GDRIVE_FOLDER_ID}",
-                "-O", str(MEME_DIR),
-                "--folder",
-                "--remaining-ok",
-            ],
-            capture_output=True,
-            text=True,
-            timeout=600,  # 10 min timeout
-        )
-        print(result.stdout[-2000:] if len(result.stdout) > 2000 else result.stdout)
-        if result.returncode != 0:
-            print(f"[Download] Warning: {result.stderr[-1000:]}")
+        import gdown
+        url = f"https://drive.google.com/drive/folders/{GDRIVE_FOLDER_ID}"
+        gdown.download_folder(url, output=str(MEME_DIR), quiet=False)
 
         count = len(list(MEME_DIR.glob("*")))
         print(f"[Download] Done! {count} files in {MEME_DIR}")
         return count > 0
 
-    except subprocess.TimeoutExpired:
-        print("[Download] Timeout! Partial download may exist.")
-        return MEME_DIR.exists() and any(MEME_DIR.iterdir())
     except Exception as e:
         print(f"[Download] Error: {e}")
+        # Don't fail the whole app if download fails — server can still start
         return False
 
 
 if __name__ == "__main__":
     success = download_memes()
-    sys.exit(0 if success else 1)
+    if not success:
+        print("[Download] Warning: No memes downloaded. Server will start with empty dataset.")
+    # Always exit 0 so the server starts regardless
+    sys.exit(0)
