@@ -35,10 +35,13 @@ app.add_middleware(
 
 # Paths - support Docker/Render or local dev
 MEME_DATA_DIR = Path("/app/meme_data/media")
+MEME_DATA_DIR_NESTED = Path("/app/meme_data/media/media")  # gdown creates subfolder
 LOCAL_DATA_DIR = Path(__file__).parent.parent / "meme_folder" / "media"
 
 # Use Docker path if it exists, otherwise fall back to local
-if MEME_DATA_DIR.exists():
+if MEME_DATA_DIR_NESTED.exists() and any(MEME_DATA_DIR_NESTED.iterdir()):
+    DATASET_DIR = MEME_DATA_DIR_NESTED
+elif MEME_DATA_DIR.exists() and any(MEME_DATA_DIR.glob("*.jpg")):
     DATASET_DIR = MEME_DATA_DIR
 elif LOCAL_DATA_DIR.exists():
     DATASET_DIR = LOCAL_DATA_DIR
